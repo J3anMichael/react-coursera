@@ -7,7 +7,7 @@ import Menu from './components/MenuComponent';
 class App extends Component {
   render(){
     return(
-      <div className="App">
+      <div>
       <Navbar dar color="primary">
         <div className="container">
             <NavbarBrand href="/">Ristorant Con Fusion</NavbarBrand>
