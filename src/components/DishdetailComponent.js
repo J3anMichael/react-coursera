@@ -1,93 +1,71 @@
-import React, { Component } from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
-
-class DishDetail extends Component{
-    constructor(props) {
-        super(props);
-
-        console.log(props);
-
-        // stores iproperties of this component
-        this.state = {
-            selectedDishDetail: this.props.dsdetail
-        };
+import React, { Component } from 'react';
+import '../App.css';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+class DishDetail extends Component {
 
 
-    }
 
     renderDish(dish) {
-
-        if (dish != null) {
+        if (dish != null)
             return (
-                <div className='col-12 col-md-5 m-1'>
-                    <Card>
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
-                        <CardBody>
-                            <CardTitle> {dish.name}</CardTitle>
-                            <CardText> {dish.description} </CardText>
-                        </CardBody>
-                    </Card>
-                </div>   
+                <div className="col-12 col-md-5 m-1">
+                    <div className="row">
+                        <Card>
+                            <CardImg top src={dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </div>
+                </div>
             );
-        }
-        else {
+        else
             return (
                 <div></div>
             );
-        }
     }
 
-    renderComments(comments){
-        if (comments == null) {
+    renderComments(dish) {
+        if (dish == null) {
             return (<div></div>)
         }
-        const cmnts = comments.map(comment => {
+        const comentarios = dish.comments.map(comment => {
             return (
-                <li key={comment.id}>
-                    <p>{comment.comment}</p>
-                    <p>-- {comment.author},
-                    &nbsp;
-                    {new Intl.DateTimeFormat('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: '2-digit'
-                    }).format(new Date(comment.date))}
-                    </p>
-                </li>
+                <div key={comment.id}>
+                    <div className="col-12 col-md-5 m-1">
+                        <div className="row">
+                            <h4>{comment.comment}</h4>
+                            <p>-- {comment.author},
+                                &nbsp;
+                                {new Intl.DateTimeFormat('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: '2-digit'
+                                }).format(new Date(comment.date))}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             )
         })
         return (
             <div className='col-12 col-md-5 m-1'>
-                <h4> Comments </h4>
+                <h3> Comments </h3>
                 <ul className='list-unstyled'>
-                    {cmnts}
+                    {comentarios}
                 </ul>
 
             </div>
         )
     }
-
-
-    render(){
-        const dish = this.props.dish
-
-        console.log(dish);
-
-        if (dish == null) {
-            return (<div></div>);
-        }
-
-        const dishItem = this.renderDish(dish);
-        const dishComment = this.renderComments(dish.comments);
-
+    render() {
         return (
-            <div className='row'>
-                {dishItem}
-                {dishComment}
+            <div className="row">
+                {this.renderDish(this.props.dish)}
+                {this.renderComments(this.props.dish)}
             </div>
-        )
+        );
     }
-
 }
-
 export default DishDetail;
