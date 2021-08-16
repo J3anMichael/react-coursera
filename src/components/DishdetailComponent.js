@@ -42,7 +42,7 @@ class DishDetail extends Component {
                                     year: 'numeric',
                                     month: 'long',
                                     day: '2-digit'
-                                }).format(new Date(comment.date))}
+                                }).format(new Date(Date.parse(comment.date)))}
                             </p>
                         </div>
                     </div>
@@ -61,9 +61,11 @@ class DishDetail extends Component {
     }
     render() {
         return (
+            <div className='container'>
             <div className="row">
                 {this.renderDish(this.props.dish)}
                 {this.renderComments(this.props.dish)}
+            </div>
             </div>
         );
     }
